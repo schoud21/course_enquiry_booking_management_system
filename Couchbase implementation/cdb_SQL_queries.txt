@@ -1,0 +1,128 @@
+Replicate Dataset in Analytics tab:
+-----------------------------------
+
+create dataset Student on LDB_Student;
+create dataset ClassRoom on LDB_Classroom;
+create dataset Course on LDB_Course;
+create dataset Lecturer on LDB_Lecturer;
+create dataset CourseLevel on LDB_CourseLevel;
+create dataset Center on LDB_Center;
+create dataset Attendance on LDB_Attendance;
+create dataset Booking on LDB_Booking;
+
+
+1. Student Course Details:
+---------------------------
+FROM
+   Student S 
+   JOIN
+      Course C 
+      ON S.courseID = C.courseID 
+      SELECT
+         S.studentName,
+         S.addressName,
+         S.phoneNumberNr,
+         C.courseName,
+         C.startDate,
+         C.endDate;
+
+2. Studnet Course Difficulty Level details:
+--------------------------------------------
+FROM
+   Student S 
+   JOIN
+      Course C 
+      ON S.courseID = C.courseID 
+      JOIN
+         CourseLevel L 
+         ON C.courseID = L.courseID 
+         SELECT
+            S.studentName,
+            C.courseName,
+            L.label AS LevelofDifficulty;
+
+3. Student Course Classroom Details:
+------------------------------------
+FROM
+   Student S 
+   JOIN
+      Course C 
+      ON S.courseID = C.courseID 
+      JOIN
+         Center Cr 
+         ON C.courseID = Cr.courseID 
+         SELECT
+            S.studentName,
+            C.courseName,
+            Cr.centerID,
+            Cr.classRoomID,
+            Cr.centerName;
+
+4. Student-Course Booking details:
+-----------------------------------
+FROM
+   Student S 
+   JOIN
+      Course C 
+      ON S.courseID = C.courseID 
+      JOIN
+         Center Cr 
+         ON C.courseID = Cr.courseID 
+         JOIN
+            Booking B 
+            ON S.studentID = B.studentID 
+            SELECT
+               S.studentName AS Name,
+               S.addressName AS Address,
+               S.phoneNumberNr AS Phone,
+               C.courseName AS Course,
+               C.startDate,
+               C.endDate,
+               B.bookingDate AS Booking_Date,
+               B.bookingType AS Booking_Type;
+
+5. Lecturer-Course-Centre details:
+-----------------------------------
+FROM
+   Course C 
+   JOIN
+      Center Cr 
+      ON C.courseID = Cr.courseID 
+      JOIN
+         Lecturer L 
+         ON C.lecturerID = L.lecturerID 
+         WHERE
+            Cr.centerName = 'Peralta Hall' 
+            SELECT
+               L.lectureName AS Name,
+               C.courseName AS Course,
+               Cr.centerName AS Center;
+
+6. Student Booking details:
+----------------------------
+FROM
+   Student S 
+   JOIN
+      Course C 
+      ON S.courseID = C.courseID 
+      JOIN
+         Booking B 
+         ON S.studentID = B.studentID 
+         AND C.courseID = B.courseID 
+         WHERE
+            S.studentID = 8 
+            SELECT
+               S.studentName AS Name,
+               S.addressName AS Student_Address,
+               S.phoneNumberNr AS Phone,
+               C.courseName AS Course,
+               B.bookingDate AS Booking_Date,
+               B.bookingType AS Payment_Type;
+
+Window function to the average attendance:
+-------------------------------------------
+FROM
+   Attendance 
+   SELECT
+      AVG(percent_attendance) AS avg_attendance;
+
