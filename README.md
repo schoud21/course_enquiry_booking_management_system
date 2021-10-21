@@ -1,1 +1,5 @@
-# course_enquiry_booking_management_system
+This project tries to design and implement a database prototype for a Learning Centre to handle its internal data for students, courses, faculties, and the respective booking details. The Learning Centre offers computer courses for teaching a wide variety of programming languages, and tools. The courses offered here are categorized into multiple levels of Begineer, Intermediate, Expert and Special. These levels come with a factor that is based on the difficulty of the course, which helps us determine the cost of the respective course. This factor makes sure that the same course offered with at a different level varies by a factor that is predetermined.
+
+The main motive behind this project is to help structure the data that the Centre has, which will help the Centre better manage and on a possible growth scale this data. Any organization offering training courses and education classes is very aware of the manual overhead that comes with managing occupancy, taking bookings and organizing schedules. The project includes ORM diagrams, DDL and DML queries to build a Database Management System in Microsoft SQL Server.
+
+Replicated this database in Couchbase. Corresponding DDL and DML commands are included.
